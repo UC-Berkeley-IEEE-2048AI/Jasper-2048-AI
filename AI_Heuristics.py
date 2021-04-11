@@ -37,10 +37,10 @@ def heuristics(grid, num_empty):
 
     # Weights
     empty_weight = 200
-    mono_weight = 100
+    mono_weight = 150
     smooth_weight = 1
     pattern_weight = 1
-    corner_weight = 100
+    corner_weight = 1000
 
     # scoring
     score += p_score * pattern_weight
