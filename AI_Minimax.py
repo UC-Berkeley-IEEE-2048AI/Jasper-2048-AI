@@ -5,7 +5,7 @@ from AI_Heuristics import heuristics
 
 # The Depth limit constant. You might change this if you want
 # Keep in mind that your AI search might be pretty slow if you use too high depth
-DEPTH = 3
+DEPTH = 4
 MAX_VALUE = math.inf
 MIN_VALUE = -math.inf
 
@@ -69,8 +69,8 @@ def minimize(grid, depth=DEPTH, alpha=MIN_VALUE, beta=MAX_VALUE):
     # TODO: (Optional) Implement conditions to stop the searching earlier
     # Would implement it after finish implementing Heuristics and MiniMax
     # ex) If there are enough empty spaces, we will proceed by skipping last two nodes
-    # if num_empty >= 6 and depth >= 3:
-    #     return heuristics(grid, num_empty)
+    if num_empty >= 6 and depth >= 3:
+        return heuristics(grid, num_empty)
 
     sum_score = 0
     for c, r in empty_cells:

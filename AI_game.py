@@ -1,12 +1,14 @@
-import os, pygame, time, random, math
+import math
+import os
+import pygame
 from copy import deepcopy
 from pprint import pprint
+
 import numpy as np
-import _2048
 from _2048.game import Game2048
 from _2048.manager import GameManager
-from AI_Minimax import maximize, minimize
-from AI_Movement import move
+
+from AI_Minimax import maximize
 
 MAX_VALUE = math.inf
 MIN_VALUE = -math.inf
