@@ -5,7 +5,7 @@ from AI_Heuristics import heuristics
 
 # The Depth limit constant. You might change this if you want
 # Keep in mind that your AI search might be pretty slow if you use too high depth
-DEPTH = 4
+DEPTH = 3
 MAX_VALUE = math.inf
 MIN_VALUE = -math.inf
 

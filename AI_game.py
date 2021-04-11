@@ -93,11 +93,15 @@ def run_game(game_class=Game2048, title='2048!', data_dir='save'):
 
             if best_move is None:
                 print('No way! Maximum number is %s' % np.max(manager.game.grid))
-                for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        running = False
-                    elif event.type == pygame.MOUSEBUTTONUP:
-                        manager.dispatch(event)
+                if np.max(manager.game.grid) == 2048:
+
+                    for event in pygame.event.get():
+                        if event.type == pygame.QUIT:
+                            running = False
+                        elif event.type == pygame.MOUSEBUTTONUP:
+                            manager.dispatch(event)
+                else:
+                    run_game()
             else:
 
                 print("Best move: ", move_name(best_move))

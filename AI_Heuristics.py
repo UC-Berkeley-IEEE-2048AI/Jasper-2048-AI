@@ -39,22 +39,23 @@ def heuristics(grid, num_empty):
     empty_weight = 200
     mono_weight = 100
     smooth_weight = 1
-    pattern_weight = 0.5
-    corner_weight = 1500
+    pattern_weight = 1
+    corner_weight = 100
 
     # scoring
-    # score += p_score * pattern_weight
-    # score += (np.sum(grid ** 2)//2)
+    score += p_score * pattern_weight
+
     score += m_score * mono_weight
     score += smooth_score * smooth_weight
-    score += corner * corner_weight
+    # score += corner * corner_weight
+    # score += corner * get_largest_value(grid)
     score += num_empty * empty_weight
 
     return score
 
 
 def smoothness(grid):
-    score = 0
+    score = np.sum(grid ** 2)
     # # Check cols
     score -= np.sum(abs(grid[:, 0] - grid[:, 1]))
     score -= np.sum(abs(grid[:, 1] - grid[:, 2]))
@@ -71,17 +72,17 @@ def smoothness(grid):
 def mono_score(grid):
 
     # Ensure the rows are either increasing or decreasing
-    colsTopBottom = sum([is_increasing(grid[:, i]) for i in range(0, COUNT_X)])
-    colsBottomTop = sum([is_decreasing(grid[:, i]) for i in range(0, COUNT_X)])
+    colsTopBottom = sum([is_increasing(grid[:, i])*(i+1)**2 for i in range(0, COUNT_X)])
+    # colsBottomTop = sum([is_decreasing(grid[:, i]) for i in range(0, COUNT_X)])
 
-    rowsLeftRight = sum([is_increasing(grid[i, :]) for i in range(0, COUNT_X)])
-    rowsRightLeft = sum([is_decreasing(grid[i, :]) for i in range(0, COUNT_X)])
+    rowsLeftRight = sum([is_increasing(grid[i, :])*(i+1)**2 for i in range(0, COUNT_X)])
+    # rowsRightLeft = sum([is_decreasing(grid[i, :]) for i in range(0, COUNT_X)])
 
     BRCorner = colsTopBottom + rowsLeftRight
-    TRCorner = colsBottomTop + rowsLeftRight
+    # TRCorner = colsBottomTop + rowsLeftRight
 
-    BLCorner = colsTopBottom + rowsRightLeft
-    TLCorner = colsBottomTop + rowsRightLeft
+    # BLCorner = colsTopBottom + rowsRightLeft
+    # TLCorner = colsBottomTop + rowsRightLeft
 
     # # or TRCorner or BLCorner or TLCorner
     return BRCorner
@@ -145,14 +146,14 @@ def get_largest_value(grid):
 def largest_in_corner(grid):
     largest = get_largest_value(grid)
 
-    if grid[0][0] == largest:
-        return True
+    # if grid[0][0] == largest:
+    #     return True
 
-    if grid[0][3] == largest:
-        return True
+    # if grid[0][3] == largest:
+    #     return True
 
-    if grid[3][0] == largest:
-        return True
+    # if grid[3][0] == largest:
+    #     return True
 
     if grid[3][3] == largest:
         return True
